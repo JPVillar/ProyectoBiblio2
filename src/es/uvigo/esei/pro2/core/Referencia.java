@@ -8,7 +8,7 @@ package es.uvigo.esei.pro2.core;
 public abstract class Referencia {
 
     public static enum TipoReferencia {
-        LIBRO, ARTICULOREVISTA, DOCUMENTOWEB
+        LIBRO, ARTICULOREVISTA, DOCUMENTOWEB, TESIS
     };
     private String autores;
     private String titulo;
