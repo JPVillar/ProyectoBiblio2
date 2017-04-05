@@ -138,8 +138,8 @@ public class Ilc {
     private void listarReferencias(Bibliografia coleccion) {
         char tipoReferencia;
         do {
-            tipoReferencia = leeCaracter("Introduce el tipo de referencia a listar(L: Libro, A: Articulo revista, D: Documento web): ");
-        } while ((tipoReferencia != 'L') && (tipoReferencia != 'A') && (tipoReferencia != 'D'));
+            tipoReferencia = leeCaracter("Introduce el tipo de referencia a listar(L: Libro, A: Articulo revista, D: Documento web, T: Tesis): ");
+        } while ((tipoReferencia != 'L') && (tipoReferencia != 'A') && (tipoReferencia != 'D') && (tipoReferencia != 'T'));
         System.out.println(coleccion.toString(tipoReferencia));
     }
 
@@ -152,8 +152,8 @@ public class Ilc {
         char tipoReferencia;
         Referencia r = null;
         do {
-            tipoReferencia = leeCaracter("Introduce el tipo de referencia (L: Libro, A: Articulo revista, D: Documento web): ");
-        } while ((tipoReferencia != 'L') && (tipoReferencia != 'A') && (tipoReferencia != 'D'));
+            tipoReferencia = leeCaracter("Introduce el tipo de referencia (L: Libro, A: Articulo revista, D: Documento web, T: Tesis): ");
+        } while ((tipoReferencia != 'L') && (tipoReferencia != 'A') && (tipoReferencia != 'D') && (tipoReferencia != 'T'));
         switch (tipoReferencia) {
             case 'L':
                 r = new Libro("", "", tipoReferencia, Referencia.TipoReferencia.LIBRO);
