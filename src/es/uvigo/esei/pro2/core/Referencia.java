@@ -7,13 +7,9 @@ package es.uvigo.esei.pro2.core;
  */
 public abstract class Referencia {
 
-    public static enum TipoReferencia {
-        LIBRO, ARTICULOREVISTA, DOCUMENTOWEB, TESIS
-    };
     private String autores;
     private String titulo;
     private int ano;
-    private TipoReferencia tipo;
 
     /**
      * Crea una nueva referencia, con sus autores, título y año
@@ -22,11 +18,10 @@ public abstract class Referencia {
      * @param titulo el título de la referencia
      * @param ano el ano de la referencia
      */
-    public Referencia(String autores, String titulo, int ano, TipoReferencia tipo) {
+    public Referencia(String autores, String titulo, int ano) {
         this.setAutores(autores);
         this.setTitulo(titulo);
         this.setAno(ano);
-        this.setTipo(tipo);
     }
 
     /**
@@ -85,30 +80,12 @@ public abstract class Referencia {
         this.ano = ano;
     }
 
-    /**
-     * Devuelve el valor del tipo de referencia
-     *
-     * @return El valor como TipoReferencia
-     */
-    public TipoReferencia getTipo() {
-        return tipo;
-    }
-
-    /**
-     * Cambia la etiqueta de la referencia
-     *
-     * @param tipo El nuevo valor, como TipoReferencia
-     */
-    public void setTipo(TipoReferencia tipo) {
-        this.tipo = tipo;
-    }
-
     public String toString() {
         StringBuilder toret = new StringBuilder();
         toret.append(getAutores() + " ; ");
         toret.append(getTitulo() + " ; ");
         toret.append(getAno() + " ; ");
-        toret.append(getTipo().toString() + "\n");
+        toret.append("\n");
         return toret.toString();
     }
 }

@@ -156,16 +156,16 @@ public class Ilc {
         } while ((tipoReferencia != 'L') && (tipoReferencia != 'A') && (tipoReferencia != 'D') && (tipoReferencia != 'T'));
         switch (tipoReferencia) {
             case 'L':
-                r = new Libro("", "", tipoReferencia, Referencia.TipoReferencia.LIBRO);
+                r = new Libro("", "", tipoReferencia);
                 break;
             case 'A':
-                r = new ArticuloRevista("", "", tipoReferencia, Referencia.TipoReferencia.ARTICULOREVISTA);
+                r = new ArticuloRevista("", "", tipoReferencia);
                 break;
             case 'D':
-                r = new DocumentoWeb("", "", tipoReferencia, Referencia.TipoReferencia.LIBRO);
+                r = new DocumentoWeb("", "", tipoReferencia);
                 break;
             case 'T':
-                r = new Tesis("", "", "", tipoReferencia, Referencia.TipoReferencia.TESIS);
+                r = new Tesis("", "", "", tipoReferencia);
         }
 
         modificaReferencia(r);
@@ -195,15 +195,22 @@ public class Ilc {
     }
 
     private void modificaReferencia(Referencia r) {
-        String info;
-        char tipoReferencia;
-        String dia;
-        String mes;
-        String anno;
-
+        char tipoReferencia = ' ';
         Scanner teclado = new Scanner(System.in);
-        Referencia.TipoReferencia etiqueta;
+        insertarDatosReferencia(r, teclado);
+        if (r instanceof Libro) {
+            insertarLibro(r, teclado, tipoReferencia);
+        } else if (r instanceof ArticuloRevista) {
+            insertarArticuloRevista(r, teclado);
+        } else if (r instanceof DocumentoWeb) {
+            insertarDocumentoWeb(r, teclado);
+        } else if (r instanceof Tesis) {
+            insertarTesis(r, teclado);
+        }
+    }
 
+    public void insertarDatosReferencia(Referencia r, Scanner teclado) {
+        String info;
         // Autores
         System.out.print("Autores de la referencia ");
         if (r.getAutores().length() > 0) {
@@ -211,11 +218,9 @@ public class Ilc {
         }
         System.out.print(": ");
         info = teclado.nextLine().trim();
-
         if (info.length() > 0) {
             r.setAutores(info);
         }
-
         // Titulo
         System.out.print("Titulo de la referencia ");
         if (r.getTitulo().length() > 0) {
@@ -223,11 +228,9 @@ public class Ilc {
         }
         System.out.print(": ");
         info = teclado.nextLine().trim();
-
         if (info.length() > 0) {
             r.setTitulo(info);
         }
-
         // Ano
         System.out.print("Ano de la referencia ");
         if (r.getAno() > 0) {
@@ -235,69 +238,77 @@ public class Ilc {
         }
         System.out.print(": ");
         info = teclado.nextLine().trim();
+    }
 
-        if (info.length() > 0) {
-            r.setAno(Integer.parseInt(info));
+    public void insertarLibro(Referencia r, Scanner teclado, char tipoReferencia) {
+        String info;
+        Libro libro = (Libro) r;
+        System.out.print("Editorial?");
+        info = teclado.nextLine().trim();
+        libro.setEditorial(info);
+        System.out.print("ISBN?");
+        info = teclado.nextLine().trim();
+        libro.setIsbn(info);
+        do {
+            tipoReferencia = leeCaracter("Introduce el formato del libro (P: papel, E: electronico): ");
+        } while ((tipoReferencia != 'P') && (tipoReferencia != 'E'));
+        switch (tipoReferencia) {
+            case 'P':
+                libro.setFormato(Libro.TipoFormato.PAPEL);
+                break;
+            case 'E':
+                libro.setFormato(Libro.TipoFormato.ELECTRONICO);
+                break;
         }
+    }
 
-        // Tipo de referencia          
-        if (r instanceof Libro) {
-            Libro libro = (Libro) r;
-            System.out.print("Editorial?");
-            info = teclado.nextLine().trim();
-            libro.setEditorial(info);
-            System.out.print("ISBN?");
-            info = teclado.nextLine().trim();
-            libro.setIsbn(info);
-            do {
-                tipoReferencia = leeCaracter("Introduce el formato del libro (P: papel, E: electronico): ");
-            } while ((tipoReferencia != 'P') && (tipoReferencia != 'E'));
-            switch (tipoReferencia) {
-                case 'P':
-                    libro.setFormato(Libro.TipoFormato.PAPEL);
-                    break;
-                case 'E':
-                    libro.setFormato(Libro.TipoFormato.ELECTRONICO);
-                    break;
-            }
-        } else if (r instanceof ArticuloRevista) {
-            ArticuloRevista revista = (ArticuloRevista) r;
-            System.out.print("Titulo revista?");
-            info = teclado.nextLine().trim();
-            revista.setTitulo(info);
-            System.out.print("Doi?");
-            info = teclado.nextLine().trim();
-            revista.setDoi(info);
-            System.out.print("Volumen?");
-            info = teclado.nextLine().trim();
-            revista.setVolumen(Integer.parseInt(info));
-            System.out.print("Numero?");
-            info = teclado.nextLine().trim();
-            revista.setNumero(Integer.parseInt(info));
-            System.out.print("Pagina inicio?");
-            info = teclado.nextLine().trim();
-            revista.setPaginaInicio(Integer.parseInt(info));
-            System.out.print("Pagina fin?");
-            info = teclado.nextLine().trim();
-            revista.setPaginaFin(Integer.parseInt(info));
-        } else if (r instanceof DocumentoWeb) {
-            DocumentoWeb web = (DocumentoWeb) r;
-            System.out.print("URL?");
-            info = teclado.nextLine().trim();
-            web.setUrl(info);
-            System.out.print("Dia?");
-            dia = teclado.nextLine().trim();
-            System.out.print("Mes?");
-            mes = teclado.nextLine().trim();
-            System.out.print("Año?");
-            anno = teclado.nextLine().trim();
-            web.setFecha(new Fecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(anno)));
-        } else if (r instanceof Tesis) {
-            Tesis tesis = (Tesis) r;
-            System.out.print("Universidad: ");
-            info = teclado.nextLine().trim();
-            tesis.setUni(info);
-        }
+    public void insertarArticuloRevista(Referencia r, Scanner teclado) {
+        String info;
+        ArticuloRevista revista = (ArticuloRevista) r;
+        System.out.print("Titulo revista?");
+        info = teclado.nextLine().trim();
+        revista.setTitulo(info);
+        System.out.print("Doi?");
+        info = teclado.nextLine().trim();
+        revista.setDoi(info);
+        System.out.print("Volumen?");
+        info = teclado.nextLine().trim();
+        revista.setVolumen(Integer.parseInt(info));
+        System.out.print("Numero?");
+        info = teclado.nextLine().trim();
+        revista.setNumero(Integer.parseInt(info));
+        System.out.print("Pagina inicio?");
+        info = teclado.nextLine().trim();
+        revista.setPaginaInicio(Integer.parseInt(info));
+        System.out.print("Pagina fin?");
+        info = teclado.nextLine().trim();
+        revista.setPaginaFin(Integer.parseInt(info));
+    }
+
+    public void insertarDocumentoWeb(Referencia r, Scanner teclado) {
+        String info;
+        String dia;
+        String mes;
+        String anno;
+        DocumentoWeb web = (DocumentoWeb) r;
+        System.out.print("URL?");
+        info = teclado.nextLine().trim();
+        web.setUrl(info);
+        System.out.print("Dia?");
+        dia = teclado.nextLine().trim();
+        System.out.print("Mes?");
+        mes = teclado.nextLine().trim();
+        System.out.print("Año?");
+        anno = teclado.nextLine().trim();
+        web.setFecha(new Fecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(anno)));
+    }
+
+    public void insertarTesis(Referencia r, Scanner teclado) {
+        String info;
+        Tesis tesis = (Tesis) r;
+        System.out.print("Universidad: ");
+        info = teclado.nextLine().trim();
+        tesis.setUni(info);
     }
 
     /**

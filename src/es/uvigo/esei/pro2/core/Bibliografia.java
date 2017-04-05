@@ -87,6 +87,14 @@ public class Bibliografia {
         referencias[pos] = referencias[--numReferencias];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder toret = new StringBuilder();
+        toret.append("Bibliografía: ");
+        toret.append(getNumReferencias() + " / " + getMaxReferencias());
+        return toret.toString();
+    }
+
     /**
      * Devuelve el contenido de todas las Referenciass
      *

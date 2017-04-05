@@ -21,12 +21,12 @@ public class Libro extends Referencia {
     private String isbn;
     private TipoFormato formato;
 
-    public Libro(String autores, String titulo, int ano, TipoReferencia tipo) {
-        super(autores, titulo, ano, tipo);
+    public Libro(String autores, String titulo, int ano) {
+        super(autores, titulo, ano);
     }
 
-    public Libro(String autores, String titulo, int ano, TipoReferencia tipo, String editorial, String isbn, TipoFormato formato) {
-        super(autores, titulo, ano, tipo);
+    public Libro(String autores, String titulo, int ano, String editorial, String isbn, TipoFormato formato) {
+        super(autores, titulo, ano);
         this.editorial = editorial;
         this.isbn = isbn;
         this.formato = formato;

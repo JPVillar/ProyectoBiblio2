@@ -11,12 +11,12 @@ public class DocumentoWeb extends Referencia {
     private String url;
     private Fecha fecha;
 
-    public DocumentoWeb(String autores, String titulo, int ano, TipoReferencia tipo) {
-        super(autores, titulo, ano, tipo);
+    public DocumentoWeb(String autores, String titulo, int ano) {
+        super(autores, titulo, ano);
     }
 
-    public DocumentoWeb(String autores, String titulo, int ano, TipoReferencia tipo, String url, Fecha fecha) {
-        super(autores, titulo, ano, tipo);
+    public DocumentoWeb(String autores, String titulo, int ano, String url, Fecha fecha) {
+        super(autores, titulo, ano);
         this.url = url;
         this.fecha = fecha;
     }

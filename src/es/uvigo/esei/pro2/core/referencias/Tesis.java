@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package es.uvigo.esei.pro2.core.referencias;
 
 import es.uvigo.esei.pro2.core.Referencia;
 
 /**
  *
- * @author alumno
+ * @author JPVillar
  */
 public class Tesis extends Referencia {
 
     String uni;
 
-    public Tesis(String uni, String autores, String titulo, int ano, TipoReferencia tipo) {
-        super(autores, titulo, ano, tipo);
+    public Tesis(String uni, String autores, String titulo, int ano) {
+        super(autores, titulo, ano);
         this.uni = uni;
     }
 

@@ -14,12 +14,12 @@ public class ArticuloRevista extends Referencia {
     private int paginaInicio;
     private int paginaFin;
 
-    public ArticuloRevista(String autores, String titulo, int ano, TipoReferencia tipo) {
-        super(autores, titulo, ano, tipo);
+    public ArticuloRevista(String autores, String titulo, int ano) {
+        super(autores, titulo, ano);
     }
 
-    public ArticuloRevista(String autores, String titulo, int ano, TipoReferencia tipo, String doi, int volumen, int numero, int paginaInicio, int paginaFin) {
-        super(autores, titulo, ano, tipo);
+    public ArticuloRevista(String autores, String titulo, int ano, String doi, int volumen, int numero, int paginaInicio, int paginaFin) {
+        super(autores, titulo, ano);
         this.doi = doi;
         this.volumen = volumen;
         this.numero = numero;
