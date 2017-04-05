@@ -6,6 +6,7 @@ import es.uvigo.esei.pro2.core.referencias.ArticuloRevista;
 import es.uvigo.esei.pro2.core.referencias.DocumentoWeb;
 import es.uvigo.esei.pro2.core.referencias.Fecha;
 import es.uvigo.esei.pro2.core.referencias.Libro;
+import es.uvigo.esei.pro2.core.referencias.Tesis;
 import es.uvigo.esei.pro2.excepciones.MaximoReferenciasException;
 import es.uvigo.esei.pro2.excepciones.NumeroReferenciasException;
 import es.uvigo.esei.pro2.excepciones.PosicionReferenciasException;
@@ -163,6 +164,8 @@ public class Ilc {
             case 'D':
                 r = new DocumentoWeb("", "", tipoReferencia, Referencia.TipoReferencia.LIBRO);
                 break;
+            case 'T':
+                r = new Tesis("", "", "", tipoReferencia, Referencia.TipoReferencia.TESIS);
         }
 
         modificaReferencia(r);
@@ -289,6 +292,11 @@ public class Ilc {
             System.out.print("Año?");
             anno = teclado.nextLine().trim();
             web.setFecha(new Fecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(anno)));
+        } else if (r instanceof Tesis) {
+            Tesis tesis = (Tesis) r;
+            System.out.print("Universidad: ");
+            info = teclado.nextLine().trim();
+            tesis.setUni(info);
         }
     }
 
