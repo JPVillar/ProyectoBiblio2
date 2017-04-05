@@ -1,4 +1,4 @@
-package excepciones;
+package es.uvigo.esei.pro2.excepciones;
 
 /**
  *

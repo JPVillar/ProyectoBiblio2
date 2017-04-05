@@ -6,9 +6,9 @@ import es.uvigo.esei.pro2.core.referencias.ArticuloRevista;
 import es.uvigo.esei.pro2.core.referencias.DocumentoWeb;
 import es.uvigo.esei.pro2.core.referencias.Fecha;
 import es.uvigo.esei.pro2.core.referencias.Libro;
-import excepciones.MaximoReferenciasException;
-import excepciones.NumeroReferenciasException;
-import excepciones.PosicionReferenciasException;
+import es.uvigo.esei.pro2.excepciones.MaximoReferenciasException;
+import es.uvigo.esei.pro2.excepciones.NumeroReferenciasException;
+import es.uvigo.esei.pro2.excepciones.PosicionReferenciasException;
 
 import java.util.Scanner;
 
